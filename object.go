@@ -18,3 +18,11 @@ func (obj JSONObject) GetJSONArray(key string) *JSONArray {
 	i2 := i[key].([]interface{})
 	return &JSONArray{data:i2[:]}
 }
+func (obj JSONObject) EntrySet() (map[string]JSONObject,error) {
+	hashmap := make(map[string]JSONObject)
+	for key,v := range obj.data.(map[string]interface{}){
+		hashmap[key] = JSONObject{data:v}
+	}
+
+	return hashmap,nil
+}

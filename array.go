@@ -21,3 +21,4 @@ func (array JSONArray) GetString(index int) (string,error) {
 	}
 	return array.data[index].(string), nil
 }
+

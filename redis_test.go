@@ -1,10 +1,12 @@
 package fastjson_test
 
 import (
+	"encoding/json"
 	"github.com/go-pack/fastjson"
 	"github.com/go-redis/redis"
 	"io/ioutil"
 	"testing"
+	"xiaoshijie.com/redismonitor/pojo"
 )
 func TestPingPong(t *testing.T)  {
 	client := redis.NewClient(&redis.Options{
@@ -53,5 +55,15 @@ func TestJSONObjectGetJSONArray(t *testing.T)  {
 
 	jsonArray := jsonObject.GetJSONArray("taskData")
 	t.Log(jsonArray.GetString(1))
+
+}
+func TestJSONObject(t *testing.T)  {
+	jsonByte, _ := ioutil.ReadFile("/Users/chen/GoPath/src/xiaoshijie.com/redismonitor/config/redis.json")
+	servers := map[string]pojo.Server{}
+	json.Unmarshal(jsonByte, &servers);
+	for k,v :=range servers{
+		t.Log(k,v)
+	}
+
 
 }
